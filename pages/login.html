@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Login</title>
+    <link rel="stylesheet" href="../styles.css">
+</head>
+<body>
+    <header class="site-header">
+        <div class="header-main">
+            <div class="logo">
+                <img src="../img/logo-azul.png" alt="Pet Shop Logo" />
+            </div>
+            <div class="search-bar">
+                <form action="/search" method="get" onsubmit="return false;">
+                    <input type="search" id="search-input" name="q" placeholder="O que você procura?">
+                    <button type="submit">Buscar</button>
+                </form>
+            </div>
+            <nav class="user-actions">
+                <a href="./login.html" class="user-action-link">
+                    <img src="../img/img_header/usuario_logo.png" alt="Entrar">
+                    <span>Entrar</span>
+                </a>
+                <a href="#" class="user-action-link">
+                    <img src="../img/img_header/carrinho_logo.png" alt="Carrinho">
+                </a>
+            </nav>
+        </div>
+        <nav class="main-nav">
+            <ul>
+                <li><a href="../index.html">Início</a></li>
+                <li><a href="./Sobre.html">Sobre</a></li>
+                <li><a href="./produtos.html">Produtos</a></li>
+                <li><a href="./novidades.html">Novidades</a></li>
+                <li><a href="./contato.html">Contato</a></li>
+            </ul>
+        </nav>
+    </header>
+    <main>
+        <section class="login-container">
+            <h2>Login</h2>
+            <form action="/login" method="POST">
+                <div class="input-group">
+                    <label for="username">Usuário</label>
+                    <input type="text" id="username" name="username" required>
+                </div>
+                <div class="input-group">
+                    <label for="password">Senha</label>
+                    <input type="password" id="password" name="password" required>
+                </div>
+                <button type="submit" class="btn">Entrar</button>
+            </form>
+            <div class="create-account">
+                <p>Não tem uma conta? <a href="../pages/cadastro.html">Crie uma agora</a></p>
+            </div>
+        </section>
+    </main>
+    <footer>
+        <p>&copy; 2024 Petshop. Todos os direitos reservados.</p>
+    </footer>
+    <script>
+        document.addEventListener("DOMContentLoaded", () => {
+            const params = new URLSearchParams(window.location.search);
+            const status = params.get("status");
+            const error = params.get("error");
+
+            if (status === "created_alert") {
+                alert("Usuário criado com sucesso!");
+            } else if (error === "not_found") {
+                alert("Usuário não encontrado!");
+            } else if (error === "incorrect_password") {
+                alert("Senha incorreta!");
+            }
+        });
+    </script>
+</body>
+</html>

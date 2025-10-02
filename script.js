@@ -56,4 +56,10 @@ $(document).ready(function(){
       setTimeout(function(){
           $(".secao-hero p").text("Bem-vindo à Pelos & Patas!");
       }, 2000);
+
+      const params = new URLSearchParams(window.location.search);
+      if (params.get("status") === "loggedin") {
+          alert("Login realizado com sucesso!");
+          window.history.replaceState({}, document.title, "/" + "index.html");
+      }
   });
