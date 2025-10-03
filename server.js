@@ -18,7 +18,7 @@ app.use(session({
 const db = mysql.createConnection({
     host: "localhost",
     user: "root",
-    password: "",
+    password: "root",
     database: "PETSHOP"
 });
 
@@ -33,11 +33,11 @@ db.connect(err => {
 app.use(express.static(path.join(__dirname)));
 
 app.post("/cadastro", (req, res) => {
-    const { username, password } = req.body;
+    const { username, password, email} = req.body;
 
     db.query(
-        "INSERT INTO USUARIOS (nome, SENHA) VALUES (?, ?)",
-        [username, password],
+        "INSERT INTO USUARIOS (nome, senha, email) VALUES (?, ?, ?)",
+        [username, password, email],
         (err) => {
             if (err) {
                 console.error(err);
@@ -50,7 +50,7 @@ app.post("/cadastro", (req, res) => {
 
 
 app.post("/login", (req, res) => {
-    const { username, password } = req.body;
+    const { username, password} = req.body;
 
     db.query("SELECT * FROM USUARIOS WHERE nome = ?", [username], (err, results) => {
         if (err) {
@@ -63,7 +63,7 @@ app.post("/login", (req, res) => {
 
         const user = results[0];
 
-        if (password === user.SENHA) {
+        if (password === user.senha) {
             req.session.user = user.nome;
             res.redirect("/index.html?status=loggedin");
         } else {
